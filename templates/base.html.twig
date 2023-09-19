@@ -9,11 +9,17 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+    </head>
+    <body class="d-flex flex-column align-items-center">
+
+    {# Importer la navbar #}
+    {% block menu %}
+        {% include 'base/nav.html.twig' %}
+    {% endblock %}
+
+        {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
     </body>
 </html>

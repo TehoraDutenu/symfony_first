@@ -13,7 +13,7 @@ services:
       password: admin
       database: api_symfony
   node:
-    type: node:14
+    type: node:16
     build:
       - yarn install
       - npm install
