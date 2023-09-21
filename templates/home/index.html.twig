@@ -2,24 +2,33 @@
 {% extends 'base.html.twig' %}
 
 {# Redéfinir le titre de la page #}
-{% block title %}Liste des jeux{% endblock %}
+{% block title %}Site de jeux
+{% endblock %}
 
 {# On ouvre le block body #}
 {% block body %}
 
-<h2 class="text-dark">{{ title }}</h2>
-<div class="d-flex flex-wrap justify-content-center col-sm-10 mt-5">
-{% for game in games %}
-    <div class="card m-2 d-flex flex-column" style="width: 18rem">
-        <img src="/images/games/{{ game.imagePath }}" class="card-img-top img-fluid" alt="{{ game.title }}" style="height:25rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{ game.title }}</h5>
-            <p class="card-text">{{ game.price !=0 ? (game.price/100)|number_format(2, ',','.') : 'Gratuit' }}</p>
-            <a href="/detail/{{ game.id }}" class="btn btn-primary">Voir détails</a>
-        </div>
-    </div>
+	{% if page is defined %}
+		<h2 class="text-dark">
+			Liste des jeux:
+			<img src="/images/pegi/{{ games[0].imgPegi }}" class="img-fluid" style="height: 40px; width: 40px;" alt="pegi">
+		</h2>
+	{% else %}
+		<h2 class="text-dark">{{ title }}</h2>
+	{% endif %}
 
-{% endfor %}
-</div>
+	<div class="d-flex flex-wrap justify-content-center col-sm-10 mt-5">
+		{% for game in games %}
+			<div class="card m-2 d-flex flex-column" style="width: 18rem">
+				<img src="/images/games/{{ game.imagePath }}" class="card-img-top img-fluid" alt="{{ game.title }}" style="height:25rem;">
+				<div class="card-body">
+					<h5 class="card-title">{{ game.title }}</h5>
+					<p class="card-text">{{ game.price !=0 ? (game.price/100)|number_format(2, ',','.') : 'Gratuit' }}</p>
+					<a href="/detail/{{ game.id }}" class="btn btn-primary">Voir détails</a>
+				</div>
+			</div>
+
+		{% endfor %}
+	</div>
 
 {% endblock %}

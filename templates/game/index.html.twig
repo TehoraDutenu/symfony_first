@@ -1,44 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - {{ 'title.edit'|trans }}{% endblock %}
+{% block title %}
+	{{ parent() }}
+	-
+	{{ 'title.edit'|trans }}
+{% endblock %}
 
 {% block body %}
 
-    <h1>Liste des jeux</h1>
+	<h1>Liste des jeux</h1>
 
-    <table class="table">
-    <thead>
-        <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Titre</th>
-        <th scope="col">Description</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Date de sortie</th>
-        <th scope="col">Nom de l'image</th>
-        <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for game in games %}
-        <tr>
-            <th scope="row">{{ game.id }}</th>
-            <td>{{ game.title }}</td>
-            <td>{{ game.description }}</td>
-            <td>{{ game.price !=0 ? (game.price/100)|number_format(2, ',', '.')~'€' : 'Gratuit'}}</td>
-            <td>{{ game.releaseDate|date('d/m/Y') }}</td>
-            <td>{{ game.imagePath }}</td>
-            <td>
-                <a href="{{ path('app_game_show', {'id': game.id}) }}" class="btn btn-primary">Voir</a>
-                {# <a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-primary">Modifier</a> #}
-            </td>
-        </tr>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Titre</th>
+				<th scope="col">Description</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Date de sortie</th>
+				<th scope="col">Nom de l'image</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for game in games %}
+				<tr>
+					<th scope="row">{{ game.id }}</th>
+					<td>{{ game.title }}</td>
+					<td>{{ game.description }}</td>
+					<td>{{ game.price !=0 ? (game.price/100)|number_format(2, ',', '.')~'€' : 'Gratuit'}}</td>
+					<td>{{ game.releaseDate|date('d/m/Y') }}</td>
+					<td>{{ game.imagePath }}</td>
+					<td>
+						<a href="{{ path('app_game_show', {'id': game.id}) }}" class="btn btn-primary">Voir</a>
+						<a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-primary">Modifier</a>
+					</td>
+				</tr>
 
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun jeu trouvé</td>
-            </tr>
-    {% endfor %}
-    </tbody>
-</table>
+			{% else %}
+				<tr>
+					<td colspan="7">Aucun jeu trouvé</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_game_new') }}" class="btn btn-success">Ajouter un jeu</a>
 
 {% endblock %}

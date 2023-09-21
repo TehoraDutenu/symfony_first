@@ -1,0 +1,15 @@
+{# Début du formulaire #}
+
+{{ form_start(form) }}
+<div class="d-flex flex-column justify-content-center">
+	<div>
+		{{ form_widget(form) }}
+	</div>
+	<div>
+		<button class="form-control btn btn-success mb-5">{{ button_label|default('Enregistrer') }}</button>
+	</div>
+</div>
+
+
+{# Fin du formulaire #}
+{{ form_end(form) }}

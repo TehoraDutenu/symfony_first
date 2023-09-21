@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Éditer le jeu
+{% endblock %}
+
+{% block body %}
+
+	<h1>Modifier le jeu</h1>
+	<h2>{{ game.title }}</h2>
+	{{ include ('game/_form.html.twig', { 'button_label': 'Modifier' } )}}
+
+	<div class="d-flex">
+		<a href="{{ path('app_admin') }}" class="btn btn-primary">Retour à la liste</a>
+
+		{% include 'game/_delete_form.html.twig' %}</div>
+
+{% endblock %}

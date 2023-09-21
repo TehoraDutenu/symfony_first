@@ -26,6 +26,25 @@ class HomeController extends AbstractController
         ]);
     }
 
+    // - Déclarer la route
+    #[Route('/games/filter/{field}', name: 'games_filter')]
+
+    public function getByFilter(GameRepository $gameRepository, $field = 'g.id ASC')
+    {
+        // - Déclarer des variables
+        $title = 'Tous les jeux';
+
+        // - Récupérer la liste des jeux
+        $games = $gameRepository->getGamesByFilter($field);
+
+        // - Afficher la vue
+        return $this->render('home/index.html.twig', [
+            'title' => $title,
+            'games' => $games
+        ]);
+    }
+
+
     // - Route pour détails
     #[Route('/detail/{id}', name: 'detail')]
     public function gameById(GameRepository $gameRepository, int $id)
@@ -54,6 +73,22 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'title' => $title,
             'games' => $games
+        ]);
+    }
+
+    // - Route pour les âges
+    #[Route('/age/{id}', name: 'age')]
+    public function gamesByAge(GameRepository $gameRepository, int $id)
+    {
+        // - Appel du repository
+        $games = $gameRepository->getGamesByAge($id);
+        $title = "Tous les jeux";
+
+        // - Afficher la vue
+        return $this->render('home/index.html.twig', [
+            'title' => $title,
+            'games' => $games,
+            'page' => 'age'
         ]);
     }
 }

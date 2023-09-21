@@ -2,57 +2,20 @@
 
 {% block body %}
 
-    <h2>{{ game.title }}</h2>
+	<h2>{{ game.title }}</h2>
 
-    {# Redéfinir des variables avec le mot-clé 'set' #}
+	{# Redéfinir des variables avec le mot-clé 'set' #}
+	{% set date = game.releaseDate|date('d/m/Y') %}
 
-    {% set date = game.releaseDate|date('d/m/Y') %}
+	{# Récupérer le template de détails #}
+	{% include 'base/detailCard.html.twig' %}
 
-    <div class="card m-3">
-        <div class="d-flex flex-row g-0">
-            <div>
-                <img src="/images/games/{{ game.imagePath }}" class="img-fluid rounded-start p-1" alt="{{ game.title }}">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">{{ game.title }}</h5>
-                    {# Boucler sur les consoles #}
-                    <p class="card-text">    
-                        {% for console in consoles %}
-                            <span class="badge rounded-pill bg-primary">{{ console.label }}</span>
-                    {% endfor %}
-                    </p>
-                    <p class="card-text pt-2"><span class="fw-bold">Synopsis : </span>{{ game.description }}</p>
-                    <p class="card-text">
-                        <small class="text-muted">Date de sortie : 
-                            <span class="text-primary fw-bold">{{ date }}</span>
-                        </small>    
-                    </p>
-                    <p class="card-text pt-2">
-                        <img src="/images/pegi/{{ game.imgPegi }}" alt="Image Pegi" class="img-thumbnail img-fluid" style="height: 60px;">
-                        Age : {{ game.label }}+
-                    </p>
-                    <div class="d-flex flex-row justify-content-around">
-                        <div class="d-flex align-items-baseline">
-                            <p class="text-warning fs-4">&#9733</p>
-                            <p class="card-text">Avis presse :
-                                <span class="text-primary fw-bold">{{ game.mediaNote }}</span>
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-baseline">
-                            <p class="text-warning fs-4">&#9733</p>
-                            <p class="card-text">Avis utilisateur :
-                                <span class="text-primary fw-bold">{{ game.userNote }}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="d-flex flex-row">
-        <div>
-            {{ include('game/_delete_form.html.twig') }}
-        </div>
-    </div>
-    {% endblock %}
+
+	<div class="d-flex flex-row">
+		<div>
+			{% include 'game/_delete_form.html.twig' %}
+		</div>
+	</div>
+
+
+{% endblock %}
